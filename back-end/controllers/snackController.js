@@ -72,11 +72,19 @@ snacks.post("/", async (req, res) => {
         success: true,
         payload: {
           id: true,
-          name: createdSnack.name[0].toUpperCase() + createdSnack.name.slice(1),  
+          name: spidersOnALog(createdSnack.name),
           image:
             "https://dummyimage.com/400x400/6e6c6e/e9e9f5.png&text=No+Image",
         },
       });
+  } else if (!createdSnack.fiber || !createdSnack.protein || !createdSnack.added_sugar) {
+      res.status(200).json({
+        success: true,
+        payload: {
+            is_healthy: null
+        }
+      })
+
   }
 });
 
