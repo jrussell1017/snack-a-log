@@ -1,7 +1,8 @@
 const express = require("express");
 const snacks = express.Router();
-const { getAllSnacks, getOneSnack } = require("../queries/snacks.js");
+const { getAllSnacks, getOneSnack, deleteSnack } = require("../queries/snacks.js");
 
+// GET ALL SNACKS
 snacks.get("/", async (req, res) => {
   const allSnacks = await getAllSnacks();
   if (allSnacks[0]) {
@@ -11,6 +12,7 @@ snacks.get("/", async (req, res) => {
   }
 });
 
+// GET ONE SNACK
 snacks.get("/:id", async (req, res) => {
   const { id } = req.params;
   try {
@@ -26,5 +28,16 @@ snacks.get("/:id", async (req, res) => {
     console.log(error);
   }
 });
+
+// DELETE SNACK
+snacks.delete("/:id", async (req, res) => {
+    const { id } = req.params;
+    const deletedSnack = await deleteSnack(id);
+    if (deletedSnack.id) {
+        res.status(200).json(deletedSnack);
+    } else {
+        res.status(404).json({ error: "Snack is not found nor deleted" });
+    }
+})
 
 module.exports = snacks;
