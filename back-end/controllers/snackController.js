@@ -7,6 +7,8 @@ const {
   createSnack,
 } = require("../queries/snacks.js");
 
+const { spidersOnALog } = require("../helpers/spidersOnALog.js");
+
 // GET ALL SNACKS
 snacks.get("/", async (req, res) => {
   const allSnacks = await getAllSnacks();
@@ -52,7 +54,17 @@ snacks.post("/", async (req, res) => {
 
   const createdSnack = await createSnack(body);
   if (createdSnack.name && createdSnack.image) {
-    res.status(200).json({ success: true, payload: createdSnack });
+    res.status(200).json({ success: true, 
+        payload: {
+            id: createdSnack.id,
+            name: spidersOnALog(createdSnack.name),
+            fiber: createdSnack.fiber,
+            protein: createdSnack.protein,
+            added_sugar: createdSnack.added_sugar,
+            is_healthy: createdSnack.is_healthy,
+            image: createdSnack.image
+        }
+        });
   } else if(createdSnack.name && !createdSnack.image) {
     res
       .status(200)
@@ -65,8 +77,6 @@ snacks.post("/", async (req, res) => {
             "https://dummyimage.com/400x400/6e6c6e/e9e9f5.png&text=No+Image",
         },
       });
-  } else if(createdSnack.name.toLowerCase() && createdSnack.name.length > 2) {
-      console.log("Split String", createdSnack.name.split(" "))
   }
 });
 
