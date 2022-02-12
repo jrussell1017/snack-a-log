@@ -5,6 +5,7 @@ const {
   getOneSnack,
   deleteSnack,
   createSnack,
+  updateSnack
 } = require("../queries/snacks.js");
 
 const { spidersOnALog } = require("../helpers/spidersOnALog.js");
@@ -127,5 +128,33 @@ snacks.post("/", async (req, res) => {
 //     })
 //   }
 // });
+
+
+// UPDATE SNACK
+snacks.put("/:id", async (req, res) => {
+    const { id } = req.params;
+    const { body } = req;
+    const updatedSnack = await updateSnack(id, body);
+    
+    if (updatedSnack.id) {
+        res.status(200).json({
+            success: true,
+            payload: {
+                id: updatedSnack.id,
+                name: spidersOnALog(updatedSnack.name),
+                fiber: updatedSnack.fiber,
+                protein: updatedSnack.protein,
+                added_sugar: updatedSnack.added_sugar,
+                is_healthy: updatedSnack.is_healthy,
+                image: updatedSnack.image 
+            }
+        })
+    } else if (!updatedSnack.id) {
+        res.status(422).json({ 
+            success: false,
+            payload: "/include all fields/"
+         })
+    }
+})
 
 module.exports = snacks;
