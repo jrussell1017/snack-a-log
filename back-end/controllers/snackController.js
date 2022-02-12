@@ -8,6 +8,7 @@ const {
 } = require("../queries/snacks.js");
 
 const { spidersOnALog } = require("../helpers/spidersOnALog.js");
+const { confirmHealth } = require("../confirmHealth.js");
 
 // GET ALL SNACKS
 snacks.get("/", async (req, res) => {
@@ -50,41 +51,41 @@ snacks.delete("/:id", async (req, res) => {
 });
 
 snacks.post("/", async (req, res) => {
-  const { body } = req;
+  const { id, name, fiber, protein, added_sugar, is_healthy, image } = req.body;
+  const createdSnack = await createSnack(req.body);
+  confirmHealth(createdSnack)
+  if(!createdSnack.image) {
+    res.status(200).json({ success: true, payload: { 
+        id: true,
+        image: "https://dummyimage.com/400x400/6e6c6e/e9e9f5.png&text=No+Image" 
+    } 
+  });
+}
 
-  const createdSnack = await createSnack(body);
-  if (createdSnack.name && createdSnack.image) {
-    res.status(200).json({ success: true, 
+if (deletedSnack.id) {
+    res.status(200).json({ success: true, payload: deletedSnack });
+  } else {
+    res.status(404).json({ success: false, payload: { id: undefined } });
+  }
+
+  if (createdSnack.id) {
+    res.status(200).json({ 
+        success: true, 
         payload: {
-            id: createdSnack.id,
-            name: spidersOnALog(createdSnack.name),
-            fiber: createdSnack.fiber,
-            protein: createdSnack.protein,
-            added_sugar: createdSnack.added_sugar,
-            is_healthy: createdSnack.is_healthy,
-            image: createdSnack.image
+            id: id,
+            name: spidersOnALog(name),
+            fiber: fiber,
+            protein: protein,
+            added_sugar: added_sugar,
+            is_healthy: is_healthy,
+            image: image
         }
         });
-  } else if(createdSnack.name && !createdSnack.image) {
-    res
-      .status(200)
-      .json({
-        success: true,
-        payload: {
-          id: true,
-          name: spidersOnALog(createdSnack.name),
-          image:
-            "https://dummyimage.com/400x400/6e6c6e/e9e9f5.png&text=No+Image",
-        },
-      });
-  } else if (!createdSnack.fiber || !createdSnack.protein || !createdSnack.added_sugar) {
-      res.status(200).json({
-        success: true,
-        payload: {
-            is_healthy: null
-        }
-      })
-
+  } else {
+    res.status(400).json({
+        success: false, 
+        payload: { is_healthy: undefined }
+    })
   }
 });
 
