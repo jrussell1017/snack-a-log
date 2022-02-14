@@ -56,6 +56,7 @@ snacks.post("/", async (req, res) => {
     const { body } = req;
     const createdSnack = await createSnack(body);
 
+
     body.is_healthy = confirmHealth(body);
 
     // If there is valid name, but no image
@@ -90,6 +91,8 @@ snacks.post("/", async (req, res) => {
         res.status(500).json({ error: "Snack creation error" })
     }
 })
+
+
 
 // UPDATE SNACK
 snacks.put("/:id", async (req, res) => {
