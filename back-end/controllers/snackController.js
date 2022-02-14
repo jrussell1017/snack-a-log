@@ -9,7 +9,7 @@ const {
 } = require("../queries/snacks.js");
 
 const { spidersOnALog } = require("../helpers/spidersOnALog.js");
-const { confirmHealth } = require("../confirmHealth.js");
+const confirmHealth = require("../confirmHealth.js");
 
 // GET ALL SNACKS
 snacks.get("/", async (req, res) => {
@@ -55,6 +55,8 @@ snacks.delete("/:id", async (req, res) => {
 snacks.post("/", async (req, res) => {
     const { body } = req;
     const createdSnack = await createSnack(body);
+
+    body.is_healthy = confirmHealth(body);
 
     // If there is valid name, but no image
     if (createdSnack.id && !createdSnack.image) {
