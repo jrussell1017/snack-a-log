@@ -54,9 +54,10 @@ snacks.delete("/:id", async (req, res) => {
 // POST
 snacks.post("/", async (req, res) => {
     const { body } = req;
+    body.is_healthy = confirmHealth(body);
+    
     const createdSnack = await createSnack(body);
 
-    body.is_healthy = confirmHealth(body);
 
     // If there is valid name, but no image
     if (createdSnack.id && !createdSnack.image) {
