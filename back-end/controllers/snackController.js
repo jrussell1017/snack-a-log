@@ -51,7 +51,6 @@ snacks.delete("/:id", async (req, res) => {
 
 snacks.post("/", async (req, res) => {
   const { body } = req;
-
   const createdSnack = await createSnack(body);
   if (createdSnack.name && createdSnack.image) {
     res.status(200).json({ success: true, 
@@ -81,6 +80,7 @@ snacks.post("/", async (req, res) => {
       res.status(200).json({
         success: true,
         payload: {
+            name: spidersOnALog(createdSnack.name),
             is_healthy: null
         }
       })
