@@ -56,7 +56,6 @@ snacks.post("/", async (req, res) => {
     const { body } = req;
     const createdSnack = await createSnack(body);
 
-
     body.is_healthy = confirmHealth(body);
 
     // If there is valid name, but no image
