@@ -17,9 +17,9 @@ function spidersOnALog(string) {
 }
 
 // spidersOnALog("spiders on a log");
-console.log(spidersOnALog("spiders on a log"))
-console.log(spidersOnALog("Flamin' Hot CheeTOS"))
-console.log(spidersOnALog("COMBOS"))
+// console.log(spidersOnALog("spiders on a log"))
+// console.log(spidersOnALog("Flamin' Hot CheeTOS"))
+// console.log(spidersOnALog("COMBOS"))
 
 
 module.exports = { spidersOnALog };
