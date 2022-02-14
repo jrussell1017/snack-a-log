@@ -1,9 +1,9 @@
 function Snack({ snack }) {
   return (
       <div>
-        Healthy: {snack.is_healthy}
       <img src={snack.image} alt="snack"></img>
-      {snack.name}
+      {snack.name} 
+        Healthy: {snack.is_healthy}
     </div>
   );
 }
