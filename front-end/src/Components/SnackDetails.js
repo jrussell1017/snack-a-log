@@ -46,6 +46,9 @@ function SnackDetails() {
         <Link to={"/snacks"}>
           <button>Back</button>
         </Link>
+        <Link to={`/snacks/${snack.id}/edit`}>
+          <button>Edit</button>
+        </Link>
         <div>
           <button onClick={handleDelete}>Delete</button>
         </div>
