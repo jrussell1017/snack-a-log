@@ -2,6 +2,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 
+import HeartHealth from "./HeartHealth";
+
 const API = process.env.REACT_APP_API_URL;
 
 function SnackDetails() {
@@ -35,6 +37,7 @@ function SnackDetails() {
     <article>
       <aside>
         <h4>Snack Health</h4>
+        <HeartHealth snackHealth={snack.is_healthy} />
       </aside>
       <div>
         <h5>{snack.name}</h5>
