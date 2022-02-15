@@ -1,7 +1,9 @@
+import SnackDetails from "../Components/SnackDetails";
+
 function Show() {
     return (
         <div>
-            <h2>This is Show.js. Showing one snack here.</h2>
+            <SnackDetails />
         </div>
     )
 }
