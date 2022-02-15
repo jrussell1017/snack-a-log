@@ -37,7 +37,7 @@ function EditSnack() {
     axios
       .put(`${API}/snacks/${id}`, snack)
       .then(() => {
-        navigate(`/snacks/${id}`);
+        navigate(`/snacks`);
       })
       .catch((err) => {
         console.log(err);
