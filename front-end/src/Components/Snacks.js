@@ -11,31 +11,22 @@ function Snacks() {
     axios
       .get(`${API}/snacks`)
       .then((res) => {
-          console.log(res.data)
-          console.log(res.data.payload)
-          setSnacks(res.data.payload);
+        console.log(res.data);
+        console.log(res.data.payload);
+        setSnacks(res.data.payload);
       })
       .catch((err) => {
-        console.log(err) ;
+        console.log(err);
       });
   }, []);
 
   return (
-    <div>
-      {snacks.map((snack) => {
-        return <Snack key={snack.id} snack={snack} />;
-      })}
-      {/* <section>
-                <table>
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                </table>
-            </section> */}
+    <div className="Snacks">
+      <article>
+        {snacks.map((snack) => {
+          return <Snack key={snack.id} snack={snack} id={snack.id} />;
+        })}
+      </article>
     </div>
   );
 }

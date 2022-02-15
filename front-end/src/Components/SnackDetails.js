@@ -35,13 +35,9 @@ function SnackDetails() {
 
   return (
     <article>
-      <aside>
-        <h4>Snack Health</h4>
-        <HeartHealth snackHealth={snack.is_healthy} />
-      </aside>
       <div>
+        <img src={snack.image} alt={snack.name}></img>
         <h5>{snack.name}</h5>
-        <img src={snack.image} alt="snack"></img>
         <h6>Protein: {snack.protein}</h6>
         <h6>Fiber: {snack.fiber}</h6>
         <h6>Added Sugar: {snack.added_sugar}</h6>
@@ -54,6 +50,10 @@ function SnackDetails() {
           <button onClick={handleDelete}>Delete</button>
         </div>
       </div>
+      <aside>
+        <h4>Snack Health</h4>
+        <HeartHealth snackHealth={snack.is_healthy} />
+      </aside>
     </article>
   );
 }
