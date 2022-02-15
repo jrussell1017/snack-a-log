@@ -1,7 +1,9 @@
+import NewSnack from "../Components/NewSnack";
+
 function New() {
     return (
         <div>
-            <h2>This is New.js. Make a New snack here.</h2>
+            <NewSnack />
         </div>
     )
 }
